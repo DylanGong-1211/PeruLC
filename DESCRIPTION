@@ -7,3 +7,7 @@ Description: The final project for SDA course.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
