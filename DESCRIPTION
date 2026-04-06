@@ -1,0 +1,9 @@
+Package: CusLC
+Type: Package
+Title: Cusco Land Change
+Version: 0.1.0
+Authors: Dylan Gong
+Description: The final project for SDA course.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
