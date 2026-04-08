@@ -14,18 +14,39 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Project Overview
+# Project Overview of 'Peru Land Cover Change From 2000 to 2020'
 
 ## Summary
 
-This R project will focus on land cover patterns and change in Peru from 2000 to 2020, 2010 will be the mid-point. The reason for choosing this location is because I am planing for hiking there. By doing this project, it not only can help me preparing for my trip, but also aid me to familiar with GIS analysis. The main objective is to compare the overall spatial distribution between several land cover types across country. I listed out main types that will be used in project, they are cropland, forest, built-up land, water, snow cover area, and bare area. Here is the break down of project's objective:
+This R project will focus on land cover patterns and change in Peru from 2000 to 2020. The reason for choosing this location is because I am planing for hiking there. By doing this project, it not only can help me preparing for my trip, but also aid me to familiar with GIS analysis. The main objective is to compare the overall spatial distribution between several land cover types across country. I listed out main types that will be used in project, they are cropland, forest, built-up land, water, snow cover area, and bare area. Here is the break down of project's objective:
 
--   Map out the land cover in Peru for 2000, 2010, 2020 separately. (visualizing)
+-   Map out the land cover in Peru from 2000 to 2020 separately. (visualizing)
 
--   Reclassify the LCCS land cover codes into my own way to do more analysis.
+-   Calculate out the area of each kind of land covers for each years. Basic analysis will be included.
 
 -   Using transitioning method and plot to processing the changing of land cover during the time period.
 
 -   Quantify the local pattern of land cover change.
 
 -   All these result should be running under R, and provide reproducible work flow.
+
+------------------------------------------------------------------------
+
+## Approach and Method
+
+I'll mainly focus on the changing of land cover that base on their total area. To make the change more observable, I decide to plot some transition graphs to show how each types land cover changing tendency.
+
+### Data
+
+The data I will use are all from `<https://cds.climate.copernicus.eu/>`, which is provided by Copernicus Climate Change Service, Climate Data Store (2019). The type of the data that I quote is Land cover classification maps from 2000 to 2020. In that data request page, I can crop the area by inputting coordinate system. To fit better into Peru, I use `North: 0; South: -19; West: -82; East: -68`. To create the land cover raster, the layer `lccs_class` which include all the land classification data will be used. Peru's polygon will be pulled out by calling function `gadm` in package `geodata`.
+
+Furthermore, in the layer `lccs_class` layer, there are several values for different kinds of land cover types. I will classify them into 8 main groups, which is `"Cropland", "Forest", "Built-up", "Water", "Snow/Ice", "Bare area", "grassland", "Wetland"`. For example, I combine "Tree cover, broadleaved, evergreen, close to open", "Tree cover, broadleaved, deciduous, close", etc. to form a group "forest". All these legend and land cover value instruction are included in the the data set.
+
+------------------------------------------------------------------------
+
+### Code
+
+-   Create a new package and create git, then push to github.
+-   Request data from `<https://cds.climate.copernicus.eu/>`, cropping through a suitable coordinate, download to local.
+-   Load data into R (package: `here`)
+-   
