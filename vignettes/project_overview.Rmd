@@ -18,9 +18,9 @@ knitr::opts_chunk$set(
 
 ## Summary
 
-This R project will focus on land cover patterns and change in Peru from 2000 to 2020. The reason for choosing this location is because I am planing for hiking there. By doing this project, it not only can help me preparing for my trip, but also aid me to familiar with GIS analysis. The main objective is to compare the overall spatial distribution between several land cover types across country. I listed out main types that will be used in project, they are cropland, forest, built-up land, water, snow cover area, and bare area. Here is the break down of project's objective:
+This R project will focus on land cover patterns and change in Peru from 2000 to 2020, 2010 will be the mid-point. The reason for choosing this location is because I am planing for hiking there. By doing this project, it not only can help me preparing for my trip, but also aid me to familiar with GIS analysis. The main objective is to compare the overall spatial distribution between several land cover types across country. I listed out main types that will be used in project, they are cropland, forest, built-up land, water, snow cover area, and bare area. Here is the break down of project's objective:
 
--   Map out the land cover in Peru for 2000 and 2020 separately. (visualizing)
+-   Map out the land cover in Peru for 2000, 2010, 2020 separately. (visualizing)
 
 -   Reclassify the LCCS land cover codes into my own way to do more analysis.
 
