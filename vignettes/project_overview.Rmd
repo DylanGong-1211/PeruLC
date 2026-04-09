@@ -42,11 +42,46 @@ The data I will use are all from `<https://cds.climate.copernicus.eu/>`, which i
 
 Furthermore, in the layer `lccs_class` layer, there are several values for different kinds of land cover types. I will classify them into 8 main groups, which is `"Cropland", "Forest", "Built-up", "Water", "Snow/Ice", "Bare area", "grassland", "Wetland"`. For example, I combine "Tree cover, broadleaved, evergreen, close to open", "Tree cover, broadleaved, deciduous, close", etc. to form a group "forest". All these legend and land cover value instruction are included in the the data set.
 
+For data analysis, a land cover area comparison data frame will be constructed. This can be a quite straightforward way to show the area difference (in 5 time slots). Moreover, I will mainly utilize the `timeseriesTrajectories` package. Instead of doing all 21 years, I will divide the whole time frame into 5 time slots (2000, 2005, 2010, 2015, 2020). By converting specific land cover categories (forests, build-ups, cropland) into a binary format by using `terra` or `dataclean` function. This package will allow me to track pixel level changes and categorize them into abundant components, for instance, Quantity, Exchange and Alternation.
+
 ------------------------------------------------------------------------
 
 ### Code
 
 -   Create a new package and create git, then push to github.
 -   Request data from `<https://cds.climate.copernicus.eu/>`, cropping through a suitable coordinate, download to local.
--   Load data into R (package: `here`)
--   
+-   Load data into R (package: `here`) and stack the raster (package`terra`)
+-   Produce all 21 years in raster layers and export.
+-   Calculate the exact area of 2000, 2005, 2010, 2015, 2000's land cover type and construct the comparison table.
+-   Using 5 time slots' stack and make the target land cover into binary data.
+-   Run the `rastertrajData()` function from `timeseriesTrajectories` package to compute metrics.
+-   Generate final trajectory maps and plots using `trajPlot()`to visualize the dynamics.
+
+------------------------------------------------------------------------
+
+## Timeline
+
+Week 1 (April 9 - April 16)
+
+-   Load in all 21 years land cover data, and plot them into a png file. Land cover will be caterized by 8 groups.
+-   Calculate the total area in km2 for each land cover type in 5 specific time slots.
+-   Using any available source to get familiar with `timeseriesTrajectories` package.
+
+Week 2 (April 17 - April 23)
+
+-   Making target land cover data into binary style. Make sure all the data is clean enough to do trajectory calculation.
+
+-   Run the `rastertrajData` get the core land cover metrics, and understand every data and statistics meaning. Make sure every data can be projected properly.
+
+-   When all the data is confirmed, run the `trajplot()` to generate spatial maps. To be proficient about the what plots represent what perspective.
+
+Week 3 (April 24- April 30)
+
+-   Build up final projection's vignettes start to doing introduction and methods parts.
+-   Analyse the final results of my data, and make sure all the code can be run properly. 
+
+Week 4 (April 30 - May 4)
+
+-   Try my best to finish all the analysis part, if cannot make it. I'll present part of my results.
+
+-   Finishing presentation slides, and prepare for it. 
