@@ -78,10 +78,20 @@ Week 2 (April 17 - April 23)
 Week 3 (April 24- April 30)
 
 -   Build up final projection's vignettes start to doing introduction and methods parts.
--   Analyse the final results of my data, and make sure all the code can be run properly. 
+-   Analyse the final results of my data, and make sure all the code can be run properly.
 
 Week 4 (April 30 - May 4)
 
 -   Try my best to finish all the analysis part, if cannot make it. I'll present part of my results.
 
--   Finishing presentation slides, and prepare for it. 
+-   Finishing presentation slides, and prepare for it.
+
+## Anticipated Outcomes
+
+-   A clean and standardized, 21-year contunous raster stack for Peru from 2000-2020. This step include resolving raw data source which is ESACCI and C3S, and reclassifying complex global land cover types into 8 functional categories.
+
+-   A comprehensive data frame will be constructed based on the exact area in kilometer, eastablishing a clear basekine for net areal changes. 
+
+-   Detailed trajectory maps and plots (constructed by the `timeseriesTrajectories` package) that break down binary land cover transitions into specific metrics. Revealing the complexity of local patterns.
+
+-   A detailed R project report that will be created by vignettes, also a formal results presentation slides will be provided.
