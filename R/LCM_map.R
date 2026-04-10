@@ -4,16 +4,10 @@ library(here)
 library(dplyr)
 library(tidyr)
 
-p2000 <- here("extdata","ESACCI-LC-L4-LCCS-Map-300m-P1Y-2000-v2.0.7cds.area-subset.0.-68.-19.-82.nc")
-p2010 <- here("extdata", "ESACCI-LC-L4-LCCS-Map-300m-P1Y-2010-v2.0.7cds.area-subset.0.-68.-19.-82.nc")
-p2020 <- here("extdata","C3S-LC-L4-LCCS-Map-300m-P1Y-2020-v2.1.1.area-subset.0.-68.-19.-82.nc")
 
-lc2000 <- rast(p2000)
-lc2010 <- rast(p2010)
-lc2020 <- rast(p2020)
-lc2000 <- lc2000[["lccs_class"]]
-lc2010 <- lc2010[["lccs_class"]]
-lc2020 <- lc2020[["lccs_class"]]
+order_files <- c(sprintf("ESACCI-LC-L4-LCCS-Map-300m-P1Y-%s-v2.0.7cds.area-subset.0.-68.-19.-82.nc", 2000:2015),
+sprintf("C3S-LC-L4-LCCS-Map-300m-P1Y-%s-v2.1.1.area-subset.0.-68.-19.-82.nc", 2016:2020))
+all_files <- here("extdata", order_files)
 
 
 
@@ -44,21 +38,6 @@ lc_reclassify <- function(lyr){
 }
 
 
-lc2000_1 <- lc_reclassify(lc2000)
-
-lc2010_1 <- lc_reclassify(lc2010)
-
-lc2020_1 <- lc_reclassify(lc2020)
-
-
-peru <- gadm(country = "PER", level = 0, path = tempdir())
-peru <- project(peru, crs(lc2000_1))
-lc2000_peru <- mask(crop(lc2000_1, peru), peru)
-lc2010_peru <- mask(crop(lc2010_1,peru), peru)
-lc2020_peru <- mask(crop(lc2020_1, peru), peru)
-
-par(mfrow = c(2, 2), mar = c(4, 4, 4, 3))
-
 color_table <- data.frame(
   values = 1:8,
   colors = c("gold", "forestgreen", "red", "blue",
@@ -71,47 +50,54 @@ label_table <- data.frame(
              "Snow/Ice", "Bare area", "grassland", "Wetland")
 )
 
-png(here("Project_Image", "peru_lc_001020.png"), width = 3200, height = 2000, res = 250)
-par(mfrow = c(2, 2), mar = c(4, 4, 4, 3))
 
-plot(lc2000_peru,col = color_table %>%
-       filter(values %in% unique(values(lc2000_peru))) %>%
-    pull(colors),
-  main = "Peru Land Cover 2000",
-  legend = FALSE,
-  axes = TRUE)
-lines(peru, col = "black", lwd = 0.5)
-legend("right", legend = leg, fill = cols, cex = 0.6, bg = "white", xpd = TRUE)
 
-plot(lc2010_peru,col = color_table %>%
-    filter(values %in% unique(values(lc2010_peru))) %>%
-    pull(colors),
-  main = "Peru Land Cover 2010",
-  legend = FALSE,
-  axes = TRUE)
-lines(peru, col = "black", lwd = 0.5)
-legend("right", legend = leg, fill = cols, cex = 0.6, bg = "white", xpd = TRUE)
+peru <- gadm(country = "PER", level = 0, path = tempdir())
 
-plot(lc2020_peru, col = color_table %>%
-    filter(values %in% unique(values(lc2020_peru))) %>%
-    pull(colors),
-  main = "Peru Land Cover 2020",
-  legend = FALSE,
-  axes = TRUE)
-lines(peru, col = "black", lwd = 0.5)
 
-legend("bottomright", legend = leg, fill = cols, cex = 0.6, bg = "white", xpd = TRUE)
+order_files <- c(sprintf("ESACCI-LC-L4-LCCS-Map-300m-P1Y-%s-v2.0.7cds.area-subset.0.-68.-19.-82.nc", 2000:2015),
+                 sprintf("C3S-LC-L4-LCCS-Map-300m-P1Y-%s-v2.1.1.area-subset.0.-68.-19.-82.nc", 2016:2020))
+all_files <- here("extdata", order_files)
 
+years <- 2000:2020
+
+con_layer <- rast(all_files[1])[["lccs_class"]]
+peru <- project(peru, crs(first_layer))
+
+
+png(here("Project_Image", "peru_lc_2000_2020.png"), width = 6000, height = 4500, res = 300)
+par(mfrow = c(4, 6), mar = c(4, 4, 6, 3), oma = c(0, 0, 0, 8))
+for (i in 1:length(all_files)) {
+  lc_rast <- rast(all_files[i])[["lccs_class"]]
+  lc_reclass <- lc_reclassify(lc_rast)
+  lc_peru <- mask(crop(lc_reclass, peru), peru)
+  present_vals <- sort(unique(values(lc_peru)[values(lc_peru) > 0]))
+  plot_colors <- color_table %>% filter(values %in% present_vals) %>% pull(colors)
+  plot(lc_peru,
+       col = plot_colors,
+       main = paste("Peru Land Cover", years[i]),
+       legend = FALSE,
+       axes = TRUE,
+       cex.main = 1.8)
+  lines(peru, col = "black", lwd = 1)
+}
+par(fig = c(0, 1, 0, 1), oma = c(0, 0, 0, 0), mar = c(0, 0, 0, 0), new = TRUE)
+plot(0, 0, type = "n", bty = "n", xaxt = "n", yaxt = "n")
+legend("bottomright",
+       legend = label_table$labels,
+       fill = color_table$colors,
+       cex = 2.5,
+       bg = "white",
+       xpd = TRUE,
+       inset = c(0, 0))
 dev.off()
 
-area_2000 <- expanse(lc2000_peru, unit = "km", byValue = TRUE)
-area_2010 <- expanse(lc2010_peru, unit = "km", byValue = TRUE)
-area_2020 <- expanse(lc2020_peru, unit = "km", byValue = TRUE)
-area_2000$Year <- 2000
-area_2010$Year <- 2010
-area_2020$Year <- 2020
-all_year_df <- bind_rows(area_2000, area_2010, area_2020)
-all_area_df <- all_year_df %>% left_join(label_table, by = c("value" = "values")) %>%
-select(Year, ClassValue = value, LandCover = labels, Area_km2 = area) %>%
-arrange(LandCover, Year)
-area_comparison_table <- final_area_df %>% select(-ClassValue) %>% pivot_wider(names_from = Year, values_from = Area_km2, names_prefix = "Year_")
+
+
+
+
+
+
+
+
+
