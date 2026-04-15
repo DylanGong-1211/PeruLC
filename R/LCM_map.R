@@ -4,7 +4,7 @@ library(here)
 library(dplyr)
 library(tidyr)
 
-
+# order and extract raw data
 order_files <- c(sprintf("ESACCI-LC-L4-LCCS-Map-300m-P1Y-%s-v2.0.7cds.area-subset.0.-68.-19.-82.nc", 2000:2015),
 sprintf("C3S-LC-L4-LCCS-Map-300m-P1Y-%s-v2.1.1.area-subset.0.-68.-19.-82.nc", 2016:2020))
 all_files <- here("extdata", order_files)
@@ -37,13 +37,14 @@ lc_reclassify <- function(lyr){
   return(new_lyr)
 }
 
-
+# setting plot color
 color_table <- data.frame(
   values = 1:8,
   colors = c("gold", "forestgreen", "red", "blue",
              "lightcyan", "tan", "yellowgreen", "purple")
 )
 
+#setting lable name
 label_table <- data.frame(
   values = 1:8,
   labels = c("Cropland", "Forest", "Built-up", "Water",
@@ -55,14 +56,11 @@ label_table <- data.frame(
 peru <- gadm(country = "PER", level = 0, path = tempdir())
 
 
-order_files <- c(sprintf("ESACCI-LC-L4-LCCS-Map-300m-P1Y-%s-v2.0.7cds.area-subset.0.-68.-19.-82.nc", 2000:2015),
-                 sprintf("C3S-LC-L4-LCCS-Map-300m-P1Y-%s-v2.1.1.area-subset.0.-68.-19.-82.nc", 2016:2020))
-all_files <- here("extdata", order_files)
-
 years <- 2000:2020
 
+# Make sure the lccs layer has same projection as Peru
 con_layer <- rast(all_files[1])[["lccs_class"]]
-peru <- project(peru, crs(first_layer))
+peru <- project(peru, crs(con_layer))
 
 
 png(here("Project_Image", "peru_lc_2000_2020.png"), width = 6000, height = 4500, res = 300)
@@ -91,13 +89,6 @@ legend("bottomright",
        xpd = TRUE,
        inset = c(0, 0))
 dev.off()
-
-
-
-
-
-
-
 
 
 

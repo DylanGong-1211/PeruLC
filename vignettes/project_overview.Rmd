@@ -88,9 +88,9 @@ Week 4 (April 30 - May 4)
 
 ## Anticipated Outcomes
 
--   A clean and standardized, 21-year contunous raster stack for Peru from 2000-2020. This step include resolving raw data source which is ESACCI and C3S, and reclassifying complex global land cover types into 8 functional categories.
+-   A clean and standardized, 21-year continuous raster stack for Peru from 2000-2020. This step include resolving raw data source which is ESACCI and C3S, and reclassifying complex global land cover types into 8 functional categories.
 
--   A comprehensive data frame will be constructed based on the exact area in kilometer, eastablishing a clear basekine for net areal changes. 
+-   A comprehensive data frame will be constructed based on the exact area in kilometer, establishing a clear baseline for net areal changes.
 
 -   Detailed trajectory maps and plots (constructed by the `timeseriesTrajectories` package) that break down binary land cover transitions into specific metrics. Revealing the complexity of local patterns.
 
