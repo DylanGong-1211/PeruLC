@@ -78,4 +78,9 @@ anim <- ggplot() +
   labs(title = "Peru Land Cover: {closest_state}", fill = NULL) +
   theme_bw()
 
-animate(anim, nframes = 100, fps = 10, renderer = gifski_renderer("peru_land_cover.gif"))
+animate(
+  anim,
+  nframes = 100,
+  fps = 10,
+  renderer = gifski_renderer(here("Project_Image", "peru_land_cover.gif"))
+)
