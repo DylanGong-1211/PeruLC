@@ -67,28 +67,15 @@ fill_vals <- c(
   "Wetland" = "purple"
 )
 
-p <- ggplot() + geom_spatraster(
-  data = lc_stack, aes(fill = factor(after_stat(value), levels = 1:8, labels = names(fill_vals)))) +
+anim <- ggplot() +
+  geom_spatraster(data = lc_stack,
+                  aes(fill = factor(after_stat(value), levels = 1:8, labels = names(fill_vals)))) +
   geom_sf(data = peru_sf, fill = NA, color = "black", linewidth = 0.2) +
+  # transition_states handles the time dimension instead of facets
+  transition_states(lyr, transition_length = 2, state_length = 1) +
   scale_fill_manual(values = fill_vals, na.translate = FALSE) +
-  labs(title = "Peru Land Cover: {current_frame}",
-       fill = NULL) +
   coord_sf(expand = FALSE) +
-  theme_bw() +
-  transition_states(lyr, transition_length = 2, state_length = 1)
+  labs(title = "Peru Land Cover: {closest_state}", fill = NULL) +
+  theme_bw()
 
-
-anim <- animate(
-  p,
-  nframes = length(years),
-  fps = 2,
-  width = 1000,
-  height = 1000,
-  res = 150,
-)
-
-
-anim_save(
-  filename = here("Project_Image", "peru_lc_2000_2020_animation.gif"),
-  animation = anim
-)
+animate(anim, nframes = 100, fps = 10, renderer = gifski_renderer("peru_land_cover.gif"))
