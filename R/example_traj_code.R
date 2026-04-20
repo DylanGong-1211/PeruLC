@@ -124,15 +124,7 @@ stackbar_data <- rasterstackData(
 
 ## Plot it. Use plot_stackbar instead of stackbarPlot
 
-pdf(file = here("Project_Image", "stackbar_plot.pdf"), width = 10, height = 6)
-pdf_convert(
-  pdf = here("Project_Image", "stackbar_plot.pdf"),
-  format = "png",
-  filenames = c(
-    here("Project_Image", "forest_stackbar_plot_1.png"),
-    here("Project_Image", "forest_stackbar_plot_2.png")
-  )
-)
+pdf(file = here("Project_Image","forest_traj_plots", "stackbar_plot.pdf"), width = 10, height = 6)
 
  plot_stackbar(stackbar_data,
              axisSize = 10,
@@ -149,3 +141,11 @@ pdf_convert(
 
 dev.off()
 
+pdf_convert(
+  pdf = here("Project_Image", "stackbar_plot.pdf"),
+  format = "png",
+  filenames = c(
+    here("Project_Image", "forest_stackbar_plot_1.png"),
+    here("Project_Image", "forest_stackbar_plot_2.png")
+  )
+)
