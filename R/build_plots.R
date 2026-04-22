@@ -109,4 +109,61 @@ ggsave(
   bg = "white"
 )
 
+# 4. Check change trajectories
+## Get the tranjectories
+traj_data_build <- rastertrajData(build_ups_area, zeroabsence = "yes")
+
+png(
+  filename = here("Project_Image","build_plots", "build_traj_plot.png"),
+  width = 2400,
+  height = 1800,
+  res = 300
+)
+
+plot_trajectory(traj_data_build) +
+  theme_void(base_size = 12) +
+  theme(
+    panel.grid = element_blank(),
+    legend.title = element_text(face = "bold"),
+    legend.position = "right")
+
+dev.off()
+
+# 5. Stackbar plot using 5 selected years
+build_yr_check <- subset(build_ups_binary, c(1, 6, 11, 16, 21))
+tps <- c(2000, 2005, 2010, 2015, 2020)
+
+stackbar_data_build <- rasterstackData(
+  x = build_yr_check,
+  timePoints = tps
+)
+
+pdf(file = here("Project_Image", "build_plots", "stackbar_plot.pdf"),
+    width = 10, height = 6)
+
+plot_stackbar(
+  stackbar_data_build,
+  axisSize = 10,
+  lbAxSize = 10,
+  lgSize = 7.5,
+  titleSize = 12,
+  datbreaks = "no",
+  upperlym = 35,
+  lowerlym = -50,
+  lymby = 5,
+  upperlym2 = 0.5,
+  lymby2 = 0.1,
+  xAngle = 0
+)
+
+dev.off()
+
+pdf_convert(
+  pdf = here("Project_Image", "build_plots", "stackbar_plot.pdf"),
+  format = "png",
+  filenames = c(
+    here("Project_Image", "build_plots", "build_stackbar_plot_1.png"),
+    here("Project_Image", "build_plots", "build_stackbar_plot_2.png")
+  )
+)
 
