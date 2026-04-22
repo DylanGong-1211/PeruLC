@@ -1,0 +1,47 @@
+---
+format:
+  revealjs:
+    title-slide: false
+    theme: black
+    slide-number: true
+    transition: fade
+    background-transition: fade
+    incremental: false
+    embed-resources: true
+    center: true
+    controls: true
+    progress: true
+    code-overflow: wrap
+  
+css:
+  - ../slide_theme/custom.scss
+
+editor_options:
+  chunk_output_type: console
+---
+## {background-color="#111111"}
+
+<div class="cover-slide">
+
+<div class="cover-image">
+![](../Project_Image/peru_land_cover.gif)
+</div>
+
+<div class="cover-text">
+<h1>Peru Land Cover Change Analysis</h1>
+<p class="cover-subtitle">Spatial Data Analysis Final Project</p>
+<p class="cover-author">Dylan Gong</p>
+</div>
+
+</div>
+
+## Why I Chose This Topic
+
+**Key Reason (story)**: My friends invited me to go Hiking from Cusco to Machu Picchu, which is located in Peru. Gaining some prior knowledge before the trip.
+
+- The country includes very different environments, such as the Amazon forest, the Andes, and coastal dry regions. Quite suitbale for land cover change analysis.
+
+- I was especially interested in whether forest, cropland, and built-up areas showed different temporal trajectories.
+
+
+
