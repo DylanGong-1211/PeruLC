@@ -1,5 +1,5 @@
 ---
-title: "Project_Overview"
+title: "Project Overview of 'Peru Land Cover Change From 2000 to 2020'"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{project_overview}
@@ -13,8 +13,6 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
-
-# Project Overview of 'Peru Land Cover Change From 2000 to 2020'
 
 ## Summary
 

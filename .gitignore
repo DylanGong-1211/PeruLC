@@ -5,3 +5,5 @@
 inst/doc
 .DS_Store
 .nc
+/doc/
+/Meta/
