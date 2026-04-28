@@ -191,3 +191,46 @@ $code-block-bg: #1a1d24;
   color: #f3f4f6;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
 }
+
+.analysis-slide h2 {
+  font-size: 0.95em;
+  line-height: 1.1;
+}
+
+.analysis-slide h3 {
+  font-size: 0.8em;
+  line-height: 1.1;
+}
+
+.analysis-slide p,
+.analysis-slide li {
+  font-size: 0.78em;
+  line-height: 1.25;
+}
+
+.analysis-slide .small {
+  font-size: 0.68em;
+}
+
+.traj-slide h2 {
+  font-size: 0.82em;
+  line-height: 1.05;
+  margin-bottom: 0.25em;
+}
+
+.traj-slide h3 {
+  font-size: 0.72em;
+  line-height: 1.05;
+  margin-bottom: 0.15em;
+}
+
+.traj-slide li {
+  font-size: 0.74em;
+  line-height: 1.18;
+  margin-bottom: 0.14em;
+}
+
+.traj-slide ul {
+  margin-top: 0.15em;
+  margin-bottom: 0.15em;
+}

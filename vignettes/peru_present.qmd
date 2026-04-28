@@ -46,12 +46,8 @@ editor_options:
 ## Research Question:
 
 
-**How did major land cover types in Peru change from 2000 to 2020, and did they follow different trajectories?**
+**"What were the major land cover changes in Peru from 2000 to 2020, and how did these land cover types change?"**
 
-### In this project, I focus on:
-- **Forest**
-- **Cropland**
-- **Built-up land**
 
 ## Data:
 
@@ -72,11 +68,12 @@ editor_options:
 
 2. **Build and visualize the land cover stack**
    - Create an animated overview of land cover change
+   - To figure out major land cover change
 
 3. **Apply category-specific trajectory analysis**
    - Create binary rasters for forest, cropland, and built-up
-   - Convert binary rasters to area
-   - Compare temporal trajectories
+   - Using functions in `timeseriesTrajectories` to get plots
+   - Analysis trajectories
   
 
 ## Step 1. Prepare and reclassify into new Land Cover Stack
@@ -222,3 +219,98 @@ animate(
 Annual land cover change in Peru from 2000 to 2020.
 
 </div>
+
+
+## Step 3. Prepare Inputs and do Trajectory Analysis
+
+```r
+library(timeseriesTrajectories)
+library(ggplot2)
+library(terra)
+library(here)
+library(dplyr)
+library(tidyterra)
+library(pdftools)
+
+# Data preparation
+lc_stack <- rast(here("processed_data", "lc_stack_2000_2020.tif"))
+cropland_binary <- lc_stack == 1
+cropland_area <- cropland_binary * cellSize(cropland_binary[[1]], unit = "km")
+years <- 2000:2020
+vert_units <- "Km2"
+```
+
+## Changes in Forest and Cropland Area Over Time {.analysis-slide}
+
+
+<div class="small">
+
+Plots were created with `plot_timeseries()` from the `timeseriesTrajectories` package.
+
+</div>
+
+::: columns
+::: {.column width="50%"}
+
+### Cropland
+![](../Project_Image/crop_plots/cropland_timeseries_area.png){width=88%}
+
+:::
+
+::: {.column width="50%"}
+
+### Forest
+![](../Project_Image/forest_plots/forest_timeseries_change_area.png){width=88%}
+
+:::
+:::
+
+- **Cropland** increased sharply around 2004 and then remained relatively stable, with a slight increase again in the late 2010s.
+- **Forest** showed a decline around 2004, followed by a long period of relative stability and a modest recovery toward the end of the study period.
+
+## Possible Explanation for Forest Loss Around 2003–2005
+
+- New logging concessions may have contributed to the increase in forest disturbance around 2003–2005.
+- Higher agricultural commodity prices may also have increased pressure on forest land.
+
+<div class="small">
+Source: Mongabay (2007), “Peru’s deforestation rate surged in 2005.”
+</div>
+
+## Change Trajectories: One-way Change {.traj-slide}
+
+- **Gain without Alternation**  
+  Appears and remains present.
+
+- **Gain with Alternation**  
+  Gains overall, with some back-and-forth change.
+
+- **Loss without Alternation**  
+  Disappears and does not return.
+
+- **Loss with Alternation**  
+  Loses overall, with some back-and-forth change.
+
+### Examples
+- `0 → 1 → 1` = Gain without Alternation
+- `1 → 0 → 0` = Loss without Alternation
+- `0 → 1 → 0 → 1` = Gain with Alternation (net change!!)
+- `1 → 0 → 1 → 0` = Loss with Alternation (net change!!)
+
+
+## Change Trajectories: Alternation {.traj-slide}
+
+
+
+- **All Alternation Gain First**  
+
+  The category first changes from absence to presence, then returns to the **original** state.
+
+- **All Alternation Loss First**  
+
+  The category first changes from presence to absence, then returns to the **original state**.
+
+### Examples
+- `0 → 1 → 0` = All Alternation Gain First (no net change!!)
+- `1 → 0 → 1` = All Alternation Loss First (no net change!!)
+
