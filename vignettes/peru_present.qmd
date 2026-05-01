@@ -403,4 +403,4 @@ Created with `plot_stackbar()` from the `timeseriesTrajectories` package
 :::
 
 - In both plots, **one-way gain/loss** is much larger than alternation.
-- Over the full study period, forest loss exceeded forest gain, while cropland gain exceeded cropland loss.
+- Forest and cropland show opposite overall trends: forest lost more than it gained, while cropland gained more than it lost, another evidence of localized forest-to-cropland conversion.
