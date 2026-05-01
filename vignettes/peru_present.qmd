@@ -314,3 +314,48 @@ Source: Mongabay (2007), “Peru’s deforestation rate surged in 2005.”
 - `0 → 1 → 0` = All Alternation Gain First (no net change!!)
 - `1 → 0 → 1` = All Alternation Loss First (no net change!!)
 
+## Spatial Patterns of Forest and Cropland Trajectories {.traj-map-slide}
+
+<div class="func-note">
+Created with `plot_trajectory()` from `timeseriesTrajectories`
+</div>
+
+::: columns
+::: {.column width="46%"}
+
+### Forest
+![](../Project_Image/forest_plots/forest_traj_plot.png){width=92%}
+
+:::
+
+::: {.column width="46%"}
+
+### Cropland
+![](../Project_Image/crop_plots/cropland_trajectory.png){width=92%}
+
+:::
+:::
+
+- **Forest** is dominated by stable presence in eastern Peru and stable absence in the west.
+- **Cropland** the changes concentrated in smaller and more fragmented areas. (scattered)
+- In both maps, gain and loss are concentrated mainly along transition zones. 
+- Some forest-loss areas appear to spatially correspond to cropland-gain areas, imply the possible localized forest-to-cropland conversion.
+
+## How to Read a Stacked Bar Trajectory Plot {.stackbar-slide}
+
+<div class="func-note">
+Created with `plot_stackbar()` from the `timeseriesTrajectories` package
+</div>
+
+<div style="text-align:center;">
+![](../Project_Image/blank_stack_bar.png){width=45%}
+</div>
+
+- **Y-axis:** annual gross change, expressed as a percentage of the region
+- **Vertical bar height:** the speed of change during each time interval
+- **Horizontal bar width:** the duration of the time interval
+- **Gross Gain / Gross Loss lines:** average change over the temporal extent
+
+<div class="source-note">
+Source: Bilintoh, Pontius Jr, and Zhang (2024), <em>Methods to compare sites concerning a category’s change during various time intervals</em>, explanation of Figure 4.
+</div>
