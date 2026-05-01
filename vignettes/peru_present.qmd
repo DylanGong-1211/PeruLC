@@ -359,3 +359,48 @@ Created with `plot_stackbar()` from the `timeseriesTrajectories` package
 <div class="source-note">
 Source: Bilintoh, Pontius Jr, and Zhang (2024), <em>Methods to compare sites concerning a category’s change during various time intervals</em>, explanation of Figure 4.
 </div>
+
+## Comparing Forest and Cropland Change Trajectories {.stackbar-compare-slide}
+
+<div class="func-note">
+Created with `plot_stackbar()` from the `timeseriesTrajectories` package
+</div>
+
+::: columns
+::: {.column width="50%"}
+
+### Forest
+![](../Project_Image/forest_plots/forest_stackbar_plot_1.png){width=97%}
+
+:::
+
+::: {.column width="50%"}
+
+### Cropland
+![](../Project_Image/crop_plots/cropland_stackbar_plot_1.png){width=97%}
+
+:::
+:::
+
+::: columns
+::: {.column width="50%"}
+
+- **Forest:** strongest loss in **2000–2005** 
+(**≈ -0.157**)
+- **Forest:** strongest gain in **2015–2020** 
+(**≈ +0.078**)
+- **Forest gross change:** **Gain ≈ +0.035**, **Loss ≈ -0.047**
+
+:::
+
+::: {.column width="50%"}
+
+- **Cropland:** strongest gain in **2000–2005** (**≈ +1.299**)
+- **Cropland:** strongest loss in **2000–2005** (**≈ -0.471**)
+- **Cropland gross change:** **Gain ≈ +0.511**, **Loss ≈ -0.303**
+
+:::
+:::
+
+- In both plots, **one-way gain/loss** is much larger than alternation.
+- Over the full study period, forest loss exceeded forest gain, while cropland gain exceeded cropland loss.
