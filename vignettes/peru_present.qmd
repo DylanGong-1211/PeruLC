@@ -431,3 +431,13 @@ Created with `plot_stackbar()` from the `timeseriesTrajectories` package
 
 - In both plots, **one-way gain/loss** is much larger than alternation.
 - Forest and cropland show opposite overall trends: forest lost more than it gained, while cropland gained more than it lost, another evidence of localized forest-to-cropland conversion.
+
+## References {.ref-slide}
+
+- Bilintoh, T. M., Pontius Jr, R. G., & Zhang, A. (2024). *Methods to compare sites concerning a category’s change during various time intervals*. GIScience & Remote Sensing, 61(1), 2409484.
+
+- Copernicus Climate Data Store (CDS). (n.d.). *ESA CCI / C3S annual land cover data*.
+
+- Mongabay. (2007). *Peru’s deforestation rate surged in 2005*.
+
+- `timeseriesTrajectories` R package. (n.d.). GitHub repository.
