@@ -113,6 +113,23 @@ plot_trajectory(traj_data) +
     legend.position = "right")
 dev.off()
 
+png(
+  filename = here("Project_Image", "forest_plots", "forest_traj_plot_mask.png"),
+  width = 2400,
+  height = 1800,
+  res = 300
+)
+plot_trajectory(traj_data) +
+  coord_sf(xlim = c(-76, -72), ylim = c(-12, -8), expand = FALSE)+
+  theme_void(base_size = 12) +
+  theme(
+    panel.grid = element_blank(),
+    legend.title = element_text(face = "bold"),
+    legend.position = "right")
+dev.off()
+
+
+
 # 5. Stack everything
 ## Here you could just subset a few years to check.
 forest_yr_check <- subset(forest_binary, c(1, 6, 11, 16, 21))

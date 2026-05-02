@@ -314,21 +314,21 @@ Source: Mongabay (2007), “Peru’s deforestation rate surged in 2005.”
 - `0 → 1 → 0` = All Alternation Gain First (no net change!!)
 - `1 → 0 → 1` = All Alternation Loss First (no net change!!)
 
-## Spatial Patterns of Forest and Cropland Trajectories {.traj-map-slide}
+## National-Scale Spatial Patterns {.traj-map-slide}
 
 <div class="func-note">
-Created with `plot_trajectory()` from `timeseriesTrajectories`
+Created with `plot_trajectory()` from the `timeseriesTrajectories` package
 </div>
 
 ::: columns
-::: {.column width="46%"}
+::: {.column width="50%"}
 
 ### Forest
 ![](../Project_Image/forest_plots/forest_traj_plot.png){width=92%}
 
 :::
 
-::: {.column width="46%"}
+::: {.column width="50%"}
 
 ### Cropland
 ![](../Project_Image/crop_plots/cropland_trajectory.png){width=92%}
@@ -336,10 +336,37 @@ Created with `plot_trajectory()` from `timeseriesTrajectories`
 :::
 :::
 
+- National maps show the **overall spatial structure** of change trajectories.
 - **Forest** is dominated by stable presence in eastern Peru and stable absence in the west.
-- **Cropland** the changes concentrated in smaller and more fragmented areas. (scattered)
-- In both maps, gain and loss are concentrated mainly along transition zones. 
-- Some forest-loss areas appear to spatially correspond to cropland-gain areas, imply the possible localized forest-to-cropland conversion.
+- **Cropland** is dominated by stable absence, with smaller and more fragmented areas of change.
+- At the national scale, these maps show broad patterns.
+
+## Zoomed-In Spatial Patterns of Change {.traj-map-slide}
+
+<div class="func-note">
+Zoomed-in trajectory maps created with `plot_trajectory()` from the `timeseriesTrajectories` package
+</div>
+
+::: columns
+::: {.column width="50%"}
+
+### Forest
+![](../Project_Image/forest_plots/forest_traj_plot_mask.png){width=96%}
+
+:::
+
+::: {.column width="50%"}
+
+### Cropland
+![](../Project_Image/crop_plots/cropland_trajectory_mask.png){width=96%}
+
+:::
+:::
+
+- The zoomed-in maps show that change is concentrated in **specific local areas**.
+- **Forest** change appears mainly along forest edges and transition zones.
+- **Cropland** change is more scattered and fragmented.
+- Some forest-loss areas appear to align with cropland-gain areas, suggesting possible localized forest-to-cropland conversion.
 
 ## How to Read a Stacked Bar Trajectory Plot {.stackbar-slide}
 

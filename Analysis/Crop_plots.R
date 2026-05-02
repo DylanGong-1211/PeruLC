@@ -130,6 +130,24 @@ ggsave(
   bg = "white"
 )
 
+p_traj_crop <- plot_trajectory(traj_data_crop) +
+  coord_sf(xlim = c(-76, -72), ylim = c(-12, -8), expand = FALSE)+
+  theme_void(base_size = 12) +
+  theme(
+    panel.grid = element_blank(),
+    legend.title = element_text(face = "bold"),
+    legend.position = "right"
+  )
+
+
+ggsave(
+  filename = here("Project_Image","crop_plots", "cropland_trajectory_mask.png"),
+  plot = p_traj_crop,
+  width = 8,
+  height = 6,
+  dpi = 300,
+  bg = "white"
+)
 
 # 5. Stackbar plot using 5 selected years
 
