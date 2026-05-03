@@ -1,7 +1,7 @@
 Package: PeruLC
 Type: Package
 Title: Peru Land Change from 2000 to 2020
-Version: 0.1.0
+Version: 0.1.1
 Authors: Dylan Gong
 Description: The final project for SDA course.
 License: What license is it under?

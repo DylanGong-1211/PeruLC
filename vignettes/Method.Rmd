@@ -1,0 +1,173 @@
+---
+title: "Method/Approach"
+author: "Dylan Gong"
+output:
+  rmarkdown::html_vignette:
+    keep_md: true
+vignette: >
+  %\VignetteIndexEntry{Method/Approach}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+fontsize: 12pt
+linestretch: 2
+---
+
+```{=html}
+<style type="text/css">
+  body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12pt;
+    line-height: 2.0;   
+    text-align: justify; 
+  }
+  
+  pre {
+    line-height: 1.5;
+  }
+  .main-container {
+  max-width: 940px; 
+}
+p {
+    margin-bottom: 1.5em;
+</style>
+```
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+```
+
+```{r setup, eval=FALSE}
+# Required Package
+library(PeruLC)
+library(terra)
+library(geodata)
+library(here)
+library(dplyr)
+library(ggplot2)
+library(tidyterra)
+library(sf)
+library(gganimate)
+library(timeseriesTrajectories)
+library(pdftools)
+```
+
+## Data Preparation
+
+The annual land cover data for Peru from 2000 to 2020 come from the Copernicus Climate Data store. They are ESA Climate Change Initiative (CCI) and the Copernicus Climate Change Service (C3S) annual land cover products. Here is the official website `https://cds.climate.copernicus.eu/`. However, for this project, it not requires other variables in the raw data set. This analysis uses only the `lccs_class` layer because it stores the detailed land cover categories throughout the project. To make raw data more controllable, the data was pre-subset to the Peru region (approximately). The resolution for this data is 300 meters.
+
+The first part of workflow was to read the annual data in order, define the study years, and require for Peru boundary for later cropping and masking. The following code shows the setup step.
+
+```{r, Data Preparation, eval=FALSE}
+# order and extract raw data
+order_files <- c(
+  sprintf("ESACCI-LC-L4-LCCS-Map-300m-P1Y-%s-v2.0.7cds.area-subset.0.-68.-19.-82.nc", 2000:2015),
+  sprintf("C3S-LC-L4-LCCS-Map-300m-P1Y-%s-v2.1.1.area-subset.0.-68.-19.-82.nc", 2016:2020)
+)
+all_files <- here("extdata", order_files)
+years <- 2000:2020
+
+# Peru boundary
+peru <- gadm(country = "PER", level = 0, path = tempdir())
+con_layer <- rast(all_files[1])[["lccs_class"]]
+peru <- project(peru, crs(con_layer))
+peru_sf <- st_as_sf(peru)
+```
+
+## Reclassification and making land cover stack
+
+The original land cover product contains many detailed land cover types, due to the huge workload, I need to reclassified them into eight broader categories: cropland, forest, built-up, water, snow/ice, bare area, grassland, and wetland. This made the data more suitable and meaningful for analysis. Here is the code for the function to do reclassify.
+
+```{r, Reclassify Function, eval=FALSE}
+lc_reclassify <- function(lyr){
+  cropland_vals <- c(10, 11, 12, 20, 30, 40)
+  forest_vals <- c(50, 60, 61, 62, 70, 71, 72, 80, 81, 82, 90, 160, 170)
+  builtup_vals <- c(190)
+  water_vals <- c(210)
+  ice_vals <- c(220)
+  bare_vals <- c(200, 201, 202)
+  grass_vals <- c(100, 110, 120, 121, 122, 130, 150, 151, 152, 153)
+  wetland_vals <- c(180)
+
+  new_lyr <- lyr
+  values(new_lyr) <- 0
+  new_lyr[lyr %in% cropland_vals] <- 1
+  new_lyr[lyr %in% forest_vals] <- 2
+  new_lyr[lyr %in% builtup_vals] <- 3
+  new_lyr[lyr %in% water_vals] <- 4
+  new_lyr[lyr %in% ice_vals] <- 5
+  new_lyr[lyr %in% bare_vals] <- 6
+  new_lyr[lyr %in% grass_vals] <- 7
+  new_lyr[lyr %in% wetland_vals] <- 8
+
+  return(new_lyr)
+}
+```
+
+After finishing the reclassify function, I used `lapply()` to apply the same workflow to every annual raster. All the files' data were stored in a list. Then using the `rast()` function in package `terra`, to make them into a single raster stack which is `lc_stack`.
+
+```{r, lc_stack, eval=FALSE}
+all_layers <- lapply(1:length(all_files), function(i) {
+  lc_rast <- rast(all_files[i])[["lccs_class"]]
+  lc_reclass <- lc_reclassify(lc_rast)
+  lc_peru <- mask(crop(lc_reclass, peru), peru)
+  names(lc_peru) <- paste0("year of_", years[i])
+  lc_peru
+})
+lc_stack <- rast(all_layers)
+```
+
+## Animated Overview of Annual Change
+
+To see an overall land cover change across Peru, I created an animated overview. This step was not the main analytical result, but it can offer an initial visual summary for me what is the major land cover change during the study period. To produce it, I assigned a fixed color to each of the eight reclassified land cover types. Then visualized the raster stack with `ggplot2`, `tidyterra` and `gganimate`. the result was exported as a GIF.
+
+
+
+```{r, Animation, eval=FALSE}
+fill_vals <- c(
+  "Cropland" = "gold",
+  "Forest" = "forestgreen",
+  "Built-up" = "red",
+  "Water" = "blue",
+  "Snow/Ice" = "lightcyan",
+  "Bare area" = "tan",
+  "Grassland" = "yellowgreen",
+  "Wetland" = "purple"
+)
+
+anim <- ggplot() +
+  geom_spatraster(
+    data = lc_stack,
+    aes(fill = factor(after_stat(value), levels = 1:8, labels = names(fill_vals)))
+  ) +
+  geom_sf(data = peru_sf, fill = NA, color = "black", linewidth = 0.2) +
+  transition_states(lyr, transition_length = 2, state_length = 1) +
+  scale_fill_manual(values = fill_vals, na.translate = FALSE) +
+  coord_sf(expand = FALSE) +
+  labs(title = "Peru Land Cover: {closest_state}", fill = NULL) +
+  theme_bw()
+animate(
+  anim,
+  nframes = 100,
+  fps = 10,
+  renderer = gifski_renderer(here("Project_Image", "peru_land_cover.gif"))
+)
+```
+
+## Catergory-Specific Area and Trajectory Analysis Setup
+
+After seeing the animated overview, I focused on three specific land cover categories: forest, cropland and built-up (reasons are in Analysis Part). For analysis, I chose to use the `timeseriesTrajectories`package. Bilintoh, Pontius Jr, and Zhang (2024) describe this framework as a way to quantify gross loss, gross gain, eight trajectories, and the three components of Quantity, Exchange, and Alternation. The function I will use for analysis is the `plot_timeseries` which visualizing the area change of land cover types, `plot_trajectory` shows the spatial pattern of trajectories change over study area, and `plot_stackbar` for stacked bar summaries for selected time intervals. 
+
+The package can only process binary raster, where `1` indicated the presence of the selected category and `0` indicated its absence. Then I also converted them into area rasters using cell size. The following example shows the workflow for cropland. The same logic was then applied to forest and built-up land.
+
+```{r, Area process, eval=FALSE}
+cropland_binary <- lc_stack == 1
+cropland_area <- cropland_binary * cellSize(cropland_binary[[1]], unit = "km")
+years <- 2000:2020
+vert_units <- "Km2"
+```
+
+The  figures or data generated from these function will be presented in the **Analysis/Results** section.
