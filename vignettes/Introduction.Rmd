@@ -1,0 +1,43 @@
+---
+title: "Introduction/Overview"
+author: "Dylan Gong"
+output:
+  rmarkdown::html_vignette:
+    keep_md: true
+vignette: >
+  %\VignetteIndexEntry{Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+fontsize: 12pt
+linestretch: 2
+---
+<style type="text/css">
+  body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12pt;
+    line-height: 2.0;   
+    text-align: justify; 
+  }
+  
+  pre {
+    line-height: 1.5;
+  }
+  .main-container {
+  max-width: 940px; 
+}
+p {
+    margin-bottom: 1.5em;
+</style>
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Land cover change is an important process in the nature and can be shaped by both environment and human activities. This makes land cover change meaningful for spatial data analysis. For personal reason, I chose Peru as my study area for research destination in this project, since my friends invited me to go hiking there. Gaining some prior knowledge could enhance my travel experience. From academic and geographic perspective, Peru is a country that contains several ecological regions, including the Amazon rainforest, the Andes, and coastal areas. These distinct environments create a landscape characterized by a wide variety of land cover types and different forms of spatial and time changes. Because of this, Peru is a good choice for studying how land cover categories change and whether these changes follow certain patterns.
+
+My project will analyzes land cover change in Peru from 2000 to 2020 by using annual land cover data. The data will be processed (see the details in `Method` part). The project will not only focusing on total net change of area, but also using certain `R` package to examine the trajectories of change. The traditional net change analysis can only see some limited differences, but in this project by using plots we could see where, when, how it changed. For instance, two different land cover types may show similar gross gain or loss, but they may follow different temporal or spatial patterns. Bilintoh, Pontius Jr, and Zhang (2024) argue that trajectory-based methods provide more information than approaches that quantify only annual net change, because they can reveal gross losses, gross gains, trajectories, and the components of Quantity, Exchange, and Alternation.
+
+This project is guided by the research question: **"What were the major land cover changes in Peru from 2000 to 2020, and how did these land cover types change?"** To make the analysis doable, I mainly focus on the major land cover types. These land cover types should strongly associated with environmental change and human development. In 21 years research period, most of them can have a effective and observable change. Before stepping in to analysis part, I will use both data and visual aids to determine those categories. To address the research question, visualizing the overall land cover change and selecting out the major land cover change will be the first step. the analysis will include **annual area change**, **spatial trajectory mapping, and stacked bar summaries of gain, loss, and alternation** by using the package `timeseriesTrajectories`. Further manipulation will be explained in the `Method` part.
