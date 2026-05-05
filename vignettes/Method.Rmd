@@ -170,4 +170,45 @@ years <- 2000:2020
 vert_units <- "Km2"
 ```
 
-The  figures or data generated from these function will be presented in the **Analysis/Results** section.
+## Meaning of each trajectories
+
+Here are all the trajectory types in this package. I summarized what Bilintoh et al. (2024) stated in his essay, and created a short instruction with example. Later, these indicators will appear in my results and analysis. 
+
+### Change Trajectories
+
+- **Gain without Alternation**  
+  Appears and remains present.
+
+- **Gain with Alternation**  
+  Gains overall, with some back-and-forth change.
+
+- **Loss without Alternation**  
+  Disappears and does not return.
+
+- **Loss with Alternation**  
+  Loses overall, with some back-and-forth change.
+
+### Examples
+- `0 → 1 → 1` = Gain without Alternation
+- `1 → 0 → 0` = Loss without Alternation
+- `0 → 1 → 0 → 1` = Gain with Alternation (net change!!)
+- `1 → 0 → 1 → 0` = Loss with Alternation (net change!!)
+
+
+### Change Trajectories: Alternation 
+
+- **All Alternation Gain First**  
+
+  The category first changes from absence to presence, then returns to the **original** state.
+
+- **All Alternation Loss First**  
+
+  The category first changes from presence to absence, then returns to the **original state**.
+
+### Examples
+- `0 → 1 → 0` = All Alternation Gain First (no net change!!)
+- `1 → 0 → 1` = All Alternation Loss First (no net change!!)
+
+
+
+The figures or data generated from these function will be presented in the **Analysis/Results** section.
