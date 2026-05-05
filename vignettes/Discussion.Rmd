@@ -1,0 +1,59 @@
+---
+title: "Discussion"
+author: "Dylan Gong"
+output:
+  rmarkdown::html_vignette:
+    keep_md: true
+vignette: >
+  %\VignetteIndexEntry{Discussion}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+fontsize: 12pt
+linestretch: 2
+---
+```{=html}
+<style type="text/css">
+  body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12pt;
+    line-height: 2.0;   
+    text-align: justify; 
+  }
+  
+  pre {
+    line-height: 1.5;
+  }
+  .main-container {
+  max-width: 940px; 
+}
+p {
+    margin-bottom: 1.5em;
+</style>
+```
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+```
+
+## Relationship bewteen Forest and Cropland
+
+The major pattern in this project is the contrast and changing correspondence between forest and cropland. The time-series plots, trajectory maps, and stackbar summaries all support this finding. In the **annual area change plots**, although there were some short-term fluctuations, we can see forest's starting point was higher than the ending point, and cropland's was lower than its ending point. It suggested a pattern that forest change was characterized by overall loss, while cropland change was characterized by overall gain. 
+
+In the **trajectory maps**, forest was dominated by **Stable Presence**, this is normal because that area where is the Amazon located. Due to the stability of such huge ecosystem, large-scale land cover change is very unlikely to occur during the study period. This is also the reason that in **stackbar plots**  the change rates were quite tiny, they were all below 1. In contrast, for cropland's spatial pattern, it was dominated by **Stable Absence**, this is also a common sense that it was impossible to grow crop all over the country. People will only chose the suitable area for developing agriculture, so the change of trajectories in the map were uneven and scattered. Compare to forest's rate of change, cropland were higher, they exceeded rate 1. 
+
+For the coincidence that forest-loss and crop-gain aligning, these three sets of plots all proved a visual evidences for this. Forest loss showed its strongest loss from 2000-2005, instead cropland showed its strongest gain in same interval.Butler reported that  that new logging concessions appeared to be a factor in the increase in forest disturbance between 2003 and 2005, and that higher commodity prices for agricultural products may also have contributed (2007). Since the the price of crop increase, it drove local farmers were more willing to grow more crops, and with the new logging concession, they cut down the trees for larger cultivated land. 
+
+## Built-up land's increasing
+
+Compare to forest and cropland, built-up's change seems quite uniform, but it still provided some information about Peru. Although it was dominated by gaining, we still can observe the spatial pattern of it. We could see that the most changing concentrated area is in a specific region. That is the area of Peru's capital city, Lima. Other gaining were happened along coastal region even inner land. OECD reports that around 30% of Peru’s population lives in the Metropolitan Municipality of Lima and that the country’s largest cities concentrate a substantial share of the national population. Furthermore, it also stated that economic regional issues are shaped by major differences between the coastal, highland, and Amazonian regions (OECD, 2025). Through this report it explained why the built-up gaining in such pattern. 
+
+## Uncertainties and limatations
+
+Since this project had quite limited time period, I have to reclassify those original land categories into eight broader types. This makes the whole workflow manageable, but there may some error values include in my own categories. For example, I categorized shrub land into grassland. This may cause the grassland larger than actual, if I do calculation on this land cover type, may cause unreality. The 300m spatial resolution can also be a limitation, since it may ignore some information in some local smaller scales. For the raw data, cause these data were two different products, they also may contain some differences. Different years are supported by different satellite archives, including AVHRR, SPOT-VGT, MERIS, PROBA-V, and Sentinel-3 sensors. Moreover, the product relies on classification and change-detection procedures (Copernicus Climate Data Store, 2025). 
+
+
+

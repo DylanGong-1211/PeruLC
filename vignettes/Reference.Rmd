@@ -1,0 +1,52 @@
+---
+title: "Reference"
+author: "Dylan Gong"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Reference}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{=html}
+<style type="text/css">
+  body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12pt;
+    line-height: 2.0;   
+    text-align: justify; 
+  }
+  
+  .main-container {
+    max-width: 940px; 
+  }
+  
+  .reference-list p {
+    text-align: left;           
+    padding-left: 2em;    
+    text-indent: -2em;
+    margin-bottom: 1.5em;
+    word-wrap: break-word;      
+    overflow-wrap: anywhere;    
+  }
+</style>
+```
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+<div class="reference-list">
+
+<p> Bilintoh, T. M., Pontius, R. G., Jr., & Zhang, A. (2024). Methods to compare sites concerning a category’s change during various time intervals. GIScience & Remote Sensing, 61(1), Article 2409484. https://doi.org/10.1080/15481603.2024.2409484
+
+<p> Copernicus Climate Data Store. (n.d.). Land cover classification gridded maps from 1992 to present derived from satellite observations. https://cds.climate.copernicus.eu/datasets/satellite-land-cover?tab=overview
+
+<p> OECD. (2025). Regional development in Peru: Territorial organisation and performance. In Regional development policy in Peru. OECD Publishing. https://www.oecd.org/en/publications/regional-development-policy-in-peru_66979f16-en/full-report/regional-development-in-peru-territorial-organisation-and-performance_97e14d52.html  
+
+<p> Butler, R. A. (2007, August 30). Peru’s deforestation rate surged in 2005. Mongabay. https://news.mongabay.com/2007/08/perus-deforestation-rate-surged-in-2005/
+
+</div>
