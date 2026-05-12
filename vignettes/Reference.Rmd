@@ -3,7 +3,7 @@ title: "Reference"
 author: "Dylan Gong"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Reference}
+  %\VignetteIndexEntry{5. Reference}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

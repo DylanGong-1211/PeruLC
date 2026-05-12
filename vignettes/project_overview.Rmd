@@ -2,7 +2,7 @@
 title: "Project Overview of 'Peru Land Cover Change From 2000 to 2020'"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{project_overview}
+  %\VignetteIndexEntry{0. project_overview}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
